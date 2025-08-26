@@ -29,8 +29,15 @@
 
   </head>
 
-  <body>
-    <main >
+  <body data-theme="winter">
+    <header>
+      <%= render "shared/navbar" %>
+    </header>
+<!--      Login Modal-->
+      <%= render "shared/login_modal" %>
+<!--    Registration Modal-->
+      <%= render "shared/registration_modal" %>
+    <main>
       <%= yield %>
     </main>
   </body>

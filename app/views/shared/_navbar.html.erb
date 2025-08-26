@@ -1,0 +1,51 @@
+<div class="navbar bg-base-100 shadow-sm flex justify-between" >
+  <div class="flex">
+    <%= link_to "Osud_Mama", root_path, class: "btn btn-ghost text-xl" %>
+  </div>
+  <div class="flex gap-2">
+    <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+        <div class="w-16 rounded-full ">
+          <img
+            alt="Profile Pic"
+            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+        </div>
+
+      </div>
+
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <li>
+          <a class="justify-between">
+            Profile
+            <span class="badge">New</span>
+          </a>
+        </li>
+        <li><a>Settings</a></li>
+        <li>
+          <% if current_user.present? %>
+            <%= link_to "Logout", destroy_user_session_path, data: {turbo_method: :delete} %>
+          <% else %>
+            <%= link_to "Log In",
+                        "#",
+                        data: {
+                          controller: "login-modal",
+                          action: "click->login-modal#open"
+                        }
+            %>
+            <%= link_to "Register",
+                        "#",
+                        data: {
+                          controller: "login-modal",
+                          action: "click->login-modal#open"
+                        }
+
+            %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
