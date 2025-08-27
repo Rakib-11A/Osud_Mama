@@ -1,15 +1,47 @@
-<div class="navbar bg-base-100 shadow-sm flex justify-between" >
-  <div class="flex">
+<div class="navbar bg-base-100 shadow-sm sticky top-0 z-50 flex  justify-between px-10" >
+  <div class="flex-start">
     <%= link_to "Osud_Mama", root_path, class: "btn btn-ghost text-xl" %>
   </div>
+
+<!--  Search bar-->
+  <div class="flex rounded-md border-2 border-gray-500 bg-red-200 overflow-hidden max-w-md mx-auto">
+    <input type="email" placeholder="Search for Products, Brands and More..."
+           class="w-full outline-none bg-white text-gray-600 text-sm px-4 py-3" />
+    <%= link_to "javascript:void(0)",
+        class: "flex items-center justify-center px-5" do %>
+      <i class="fa-solid fa-magnifying-glass"></i>
+    <% end %>
+
+  </div>
+
   <div class="flex gap-2">
-    <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+    <!--  Track Order Section-->
+    <div class="flex">
+      <%= link_to "javascript:void(0)",
+                  class: "btn btn-ghost " do %>
+        <div class="flex justify-center items-center gap-4">
+          <p class="text-center text-3xl"><i class="fa-solid fa-truck-fast"></i></p>
+          <p><span class="text-sm">Track</span> <br> <span class="font-bold">Your Order</span></p>
+        </div>
+      <% end %>
+    </div>
+
+    <!--      Sign In Section-->
     <div class="dropdown dropdown-end">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-        <div class="w-16 rounded-full ">
-          <img
-            alt="Profile Pic"
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+      <div tabindex="0" role="button" class="btn btn-ghost hover:text-purple-600 gap-2">
+        <div class="flex justify-center items-center w-8 h-8 ">
+          <i class="fa-solid fa-user-circle text-xl"></i>
+        </div>
+
+        <div class="flex justify-center items-center">
+          <p class="text-center leading-none">
+            <span class="text-xs">Welcome,</span><br>
+            <% if current_user.present? %>
+              <span class="text-xs"><%= current_user.email.split("@").first %>!</span>
+            <% else %>
+              <span class="text-xs">Sign in/<span class="font-bold">Register</span></span>
+            <% end %>
+          </p>
         </div>
 
       </div>
@@ -36,16 +68,25 @@
                         }
             %>
             <%= link_to "Register",
-                        "#",
-                        data: {
-                          controller: "login-modal",
-                          action: "click->login-modal#open"
-                        }
+                        new_user_registration_path
 
             %>
           <% end %>
         </li>
       </ul>
+    </div>
+    <div class="flex justify-center items-center">
+      <%= link_to "javascript:void(0)",
+                  class: "btn btn-ghost text-xl" do %>
+        <div class="relative">
+          <i class="fa-solid fa-cart-shopping text-2xl"></i>
+          <span
+            class="absolute -top-2 -right-2 bg-red-400 text-white text-xs font-bold px-2 py-0.5 rounded-full"
+          >
+      0
+    </span>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -9,12 +9,10 @@ export default class extends Controller {
   open(event){
     event.preventDefault()
     this.openModal("login-modal")
-    this.openModal("registration-modal")
   }
   close(event){
     event.preventDefault()
     this.closeModal("login-modal")
-    this.closeModal("registration-modal")
   }
   openModal(modalId){
     const modal = document.getElementById(modalId)
