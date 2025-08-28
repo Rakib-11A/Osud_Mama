@@ -1,163 +1,9 @@
 <!-- app/views/home/index.html.erb -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopVibe - Your Favorite Online Store</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
 
-  <!-- Tailwind CSS -->
-<!--  <script src="https://cdn.tailwindcss.com"></script>-->
-
-  <!-- Icons -->
-<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">-->
-
-  <style>
-      .hero-gradient {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      }
-
-      .product-card:hover {
-          transform: translateY(-4px);
-          transition: transform 0.3s ease;
-      }
-
-      .banner-slide {
-          background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-      }
-  </style>
-</head>
 <body class="bg-gray-50">
 
-<!-- Header Section -->
-<header class="bg-white shadow-md sticky top-0 z-50">
-  <!-- Top Bar -->
-  <div class="bg-gray-900 text-white text-sm">
-    <div class="container mx-auto px-4 py-2 flex justify-between items-center">
-      <span>Free shipping on orders over $50!</span>
-      <div class="flex space-x-4">
-        <a href="#" class="hover:text-gray-300">Help</a>
-        <a href="#" class="hover:text-gray-300"><i class="fa-solid fa-truck-fast mr-1"></i>Track Order</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main Header -->
-  <div class="container mx-auto px-4 py-4">
-    <div class="flex items-center justify-between">
-      <!-- Logo -->
-      <div class="flex items-center space-x-2">
-        <i class="fa-solid fa-pills text-2xl text-purple-600"></i>
-        <%= link_to root_path, class: "text-2xl font-bold text-gray-800" do %>
-          Osud_Mama
-        <% end %>
-      </div>
-
-      <!-- Search Bar -->
-      <div class="flex-1 max-w-lg mx-8">
-        <%= form_with url: "#", method: :get, local: true, class: "relative" do |f| %>
-          <%= f.text_field :q, placeholder: "Search products...",
-                           class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" %>
-          <button type="submit" class="absolute right-2 top-2 text-gray-500 hover:text-purple-600">
-            <i class="fas fa-search"></i>
-          </button>
-        <% end %>
-      </div>
-
-      <!-- User Actions -->
-      <div class="flex items-center space-x-6">
-        <%= link_to "#", class: "relative text-gray-600 hover:text-purple-600" do %>
-          <i class="fas fa-heart text-xl"></i>
-          <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">3</span>
-        <% end %>
-
-        <%= link_to "#", class: "relative text-gray-600 hover:text-purple-600" do %>
-          <i class="fas fa-shopping-cart text-xl"></i>
-          <span class="absolute -top-2 -right-2 bg-purple-500 text-white text-xs rounded-full px-1">5</span>
-        <% end %>
-        <!--User Profile-->
-        <%# if user_signed_in? %>
-<!--          <div class="relative">-->
-<!--            <button class="flex items-center text-gray-600 hover:text-purple-600">-->
-<!--              <i class="fas fa-user-circle text-xl"></i>-->
-<!--              <span><%#= current_user.email.split("@").first %></span>-->
-<!--            </button>-->
-<!--          </div>-->
-        <%# else %>
-          <%#= link_to "Login", new_user_session_path, class: "bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700" %>
-        <%# end %>
-
-
-        <div class="dropdown dropdown-end">
-          <div tabindex="0" role="button" class="btn btn-ghost hover:text-purple-600 gap-2">
-            <div class="flex justify-center items-center w-8 h-8 ">
-              <i class="fa-solid fa-user-circle text-xl"></i>
-            </div>
-
-            <div class="flex justify-center items-center">
-              <p class="text-center leading-none">
-                <span class="text-xs">Welcome,</span><br>
-                <% if current_user.present? %>
-                  <span class="text-xs"><%= current_user.email.split("@").first %>!</span>
-                <% else %>
-                  <span class="text-xs">Sing in/<span class="font-bold">Register</span></span>
-                <% end %>
-              </p>
-            </div>
-
-          </div>
-
-          <ul
-            tabindex="0"
-            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-            <li>
-              <a class="justify-between">
-                Profile
-                <span class="badge">New</span>
-              </a>
-            </li>
-            <li><a>Settings</a></li>
-            <li>
-              <% if current_user.present? %>
-                <%= link_to "Logout", destroy_user_session_path, data: {turbo_method: :delete} %>
-              <% else %>
-                <%= link_to "Log In",
-                            "#",
-                            data: {
-                              controller: "login-modal",
-                              action: "click->login-modal#open"
-                            }
-                %>
-                <%= link_to "Register",
-                            new_user_registration_path
-
-                %>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Navigation Menu -->
-    <nav class="mt-4 border-t border-gray-200 pt-4">
-      <ul class="flex space-x-8">
-        <li><%= link_to "All Categories", "javascript:void(0)", class: "text-gray-700 hover:text-purple-600 font-medium" %></li>
-        <li><%= link_to "Electronics", "javascript:void(0)", class: "text-gray-700 hover:text-purple-600" %></li>
-        <li><%= link_to "Fashion", "javascript:void(0)", class: "text-gray-700 hover:text-purple-600" %></li>
-        <li><%= link_to "Home & Garden", "javascript:void(0)", class: "text-gray-700 hover:text-purple-600" %></li>
-        <li><%= link_to "Sports", "javascript:void(0)", class: "text-gray-700 hover:text-purple-600" %></li>
-        <li><%= link_to "Books", "javascript:void(0)", class: "text-gray-700 hover:text-purple-600" %></li>
-        <li><%= link_to "Sale", "javascript:void(0)", class: "text-red-600 hover:text-red-700 font-bold" %></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
 <!-- Hero Section -->
-<section class="hero-gradient text-white py-16">
+<section class="hero-gradient text-white py-10 mt-41">
   <div class="container mx-auto px-4">
     <div class="flex items-center justify-between">
       <div class="max-w-lg">
@@ -165,18 +11,18 @@
         <p class="text-xl mb-6">Up to 70% off on trending products</p>
         <p class="text-lg mb-8">Discover amazing deals on electronics, fashion, and more!</p>
         <%= link_to "Shop Now", "javascript:void(0)",
-                    class: "bg-white text-purple-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 inline-block" %>
+                    class: "bg-white text-primary-blue px-8 py-3 rounded-lg font-bold hover:bg-gray-100 inline-block" %>
       </div>
       <div class=" lg:block">
-        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500"
-             alt="Shopping" class="rounded-lg shado                       -2xl">
+        <img src="https://plus.unsplash.com/premium_photo-1671721437895-b1334ee54723?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D"
+             alt="Shopping" class="rounded-lg shadow">
       </div>
     </div>
   </div>
 </section>
 
 <!-- Trust Badges Section -->
-<section class="bg-white py-8 border-b border-gray-200">
+<section class="bg-white py-6 border-b border-gray-200">
   <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
       <div class="flex items-center justify-center space-x-3">
@@ -194,7 +40,7 @@
         </div>
       </div>
       <div class="flex items-center justify-center space-x-3">
-        <i class="fas fa-shield-alt text-2xl text-purple-600"></i>
+        <i class="fas fa-shield-alt text-2xl text-primary-blue"></i>
         <div>
           <h3 class="font-semibold">Secure Payment</h3>
           <p class="text-sm text-gray-600">SSL encrypted</p>
@@ -216,44 +62,115 @@
   <div class="container mx-auto px-4">
     <h2 class="text-3xl font-bold text-center mb-8">Shop by Category</h2>
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-
-
-
-        <div class="text-center group cursor-pointer">
+      <%# @categories.each do |category| %>
+        <div class="text-center category-cart group cursor-pointer shadow-lg p-4">
           <%= link_to "javascript:void(0)" do %>
-            <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
-              <i class=" text-2xl text-purple-600"></i>
+            <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg :shadow-xl transition-shadow">
+<!--              <i class=" text-2xl change-color"></i>-->
+              <%= image_tag "https://medeasy.health/_next/image?url=https%3A%2F%2Fapi.medeasy.health%2Fmedia%2Fmedicines%2Fcategories%2Fmedical-prescription.png&w=256&q=75" %>
             </div>
-            <h3 class="font-medium text-gray-800 group-hover:text-purple-600">Category Name</h3>
+            <h3 class="font-medium text-gray-800 change-color">Prescription Medicine</h3>
           <% end %>
         </div>
+      <%# end %>
 
-
-      <div class="text-center group cursor-pointer">
+      <div class="text-center category-cart group cursor-pointer shadow-lg p-4">
         <%= link_to "javascript:void(0)" do %>
-          <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
-            <i class=" text-2xl text-purple-600"></i>
+          <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg :shadow-xl transition-shadow">
+            <!--              <i class=" text-2xl change-color"></i>-->
+            <%= image_tag "https://medeasy.health/_next/image?url=https%3A%2F%2Fapi.medeasy.health%2Fmedia%2Fmedicines%2Fcategories%2Fdrugs.png&w=256&q=75" %>
           </div>
-          <h3 class="font-medium text-gray-800 group-hover:text-purple-600">Category Name</h3>
+          <h3 class="font-medium text-gray-800 change-color">OTC Medicine</h3>
         <% end %>
       </div>
 
-
-      <div class="text-center group cursor-pointer">
+      <div class="text-center category-cart group cursor-pointer shadow-lg p-4">
         <%= link_to "javascript:void(0)" do %>
-          <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
-            <i class=" text-2xl text-purple-600"></i>
+          <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg :shadow-xl transition-shadow">
+            <!--              <i class=" text-2xl change-color"></i>-->
+            <%= image_tag "https://medeasy.health/_next/image?url=https%3A%2F%2Fapi.medeasy.health%2Fmedia%2Fmedicines%2Fcategories%2Fwoman.png&w=256&q=75" %>
           </div>
-          <h3 class="font-medium text-gray-800 group-hover:text-purple-600">Category Name</h3>
+          <h3 class="font-medium text-gray-800 change-color">Women's Choice</h3>
         <% end %>
       </div>
 
-      <div class="text-center group cursor-pointer">
+      <div class="text-center category-cart group cursor-pointer shadow-lg p-4">
         <%= link_to "javascript:void(0)" do %>
-          <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
-            <i class=" text-2xl text-purple-600"></i>
+          <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg :shadow-xl transition-shadow">
+            <!--              <i class=" text-2xl change-color"></i>-->
+            <%= image_tag "https://medeasy.health/_next/image?url=https%3A%2F%2Fapi.medeasy.health%2Fmedia%2Fmedicines%2Fcategories%2FPersonal-Care.png&w=256&q=75" %>
           </div>
-          <h3 class="font-medium text-gray-800 group-hover:text-purple-600">Category Name</h3>
+          <h3 class="font-medium text-gray-800 change-color">Personal Care</h3>
+        <% end %>
+      </div>
+
+      <div class="text-center category-cart group cursor-pointer shadow-lg p-4">
+        <%= link_to "javascript:void(0)" do %>
+          <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg :shadow-xl transition-shadow">
+            <!--              <i class=" text-2xl change-color"></i>-->
+            <%= image_tag "https://medeasy.health/_next/image?url=https%3A%2F%2Fapi.medeasy.health%2Fmedia%2Fmedicines%2Fcategories%2FDiabetics-Care.png&w=256&q=75" %>
+          </div>
+          <h3 class="font-medium text-gray-800 change-color">Diabetic Care</h3>
+        <% end %>
+      </div>
+
+      <div class="text-center category-cart group cursor-pointer shadow-lg p-4">
+        <%= link_to "javascript:void(0)" do %>
+          <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg :shadow-xl transition-shadow">
+            <!--              <i class=" text-2xl change-color"></i>-->
+            <%= image_tag "https://medeasy.health/_next/image?url=https%3A%2F%2Fapi.medeasy.health%2Fmedia%2Fmedicines%2Fcategories%2Fbaby-boy.png&w=256&q=75" %>
+          </div>
+          <h3 class="font-medium text-gray-800 change-color">Baby Care</h3>
+        <% end %>
+      </div>
+
+      <div class="text-center category-cart group cursor-pointer shadow-lg p-4">
+        <%= link_to "javascript:void(0)" do %>
+          <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg :shadow-xl transition-shadow">
+            <!--              <i class=" text-2xl change-color"></i>-->
+            <%= image_tag "https://medeasy.health/_next/image?url=https%3A%2F%2Fapi.medeasy.health%2Fmedia%2Fmedicines%2Fcategories%2Fteeth.png&w=256&q=75" %>
+          </div>
+          <h3 class="font-medium text-gray-800 change-color">Dental Care</h3>
+        <% end %>
+      </div>
+
+      <div class="text-center category-cart group cursor-pointer shadow-lg p-4">
+        <%= link_to "javascript:void(0)" do %>
+          <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg :shadow-xl transition-shadow">
+            <!--              <i class=" text-2xl change-color"></i>-->
+            <%= image_tag "https://medeasy.health/_next/image?url=https%3A%2F%2Fapi.medeasy.health%2Fmedia%2Fmedicines%2Fcategories%2Fhygiene-products.png&w=256&q=75" %>
+          </div>
+          <h3 class="font-medium text-gray-800 change-color">Hygiene & Freshness</h3>
+        <% end %>
+      </div>
+
+      <div class="text-center category-cart group cursor-pointer shadow-lg p-4">
+        <%= link_to "javascript:void(0)" do %>
+          <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg :shadow-xl transition-shadow">
+            <!--              <i class=" text-2xl change-color"></i>-->
+            <%= image_tag "https://medeasy.health/_next/image?url=https%3A%2F%2Fapi.medeasy.health%2Fmedia%2Fmedicines%2Fcategories%2Fherbal.png&w=256&q=75" %>
+          </div>
+          <h3 class="font-medium text-gray-800 change-color">Herbal Medicine</h3>
+        <% end %>
+      </div>
+
+      <div class="text-center category-cart group cursor-pointer shadow-lg p-4">
+        <%= link_to "javascript:void(0)" do %>
+          <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg :shadow-xl transition-shadow">
+            <!--              <i class=" text-2xl change-color"></i>-->
+            <%= image_tag "https://medeasy.health/_next/image?url=https%3A%2F%2Fapi.medeasy.health%2Fmedia%2Fmedicines%2Fcategories%2Fsupplement.png&w=256&q=75" %>
+          </div>
+          <h3 class="font-medium text-gray-800 change-color">Supplement</h3>
+        <% end %>
+      </div>
+
+      <div class="text-center category-cart group cursor-pointer shadow-lg p-4">
+        <%= link_to "javascript:void(0)" do %>
+          <div class="bg-white rounded-full w-20 h-20 mx-auto mb-3 flex items-center justify-center shadow-lg :shadow-xl transition-shadow">
+            <!--              <i class=" text-2xl change-color"></i>-->
+            <%= image_tag "https://medeasy.health/_next/image?url=https%3A%2F%2Fapi.medeasy.health%2Fmedia%2Fmedicines%2Fcategories%2Fdiaper.png&w=256&q=75" %>
+          </div>
+          <h3 class="font-medium text-gray-800 change-color">Diapers</h3>
         <% end %>
       </div>
 
@@ -266,7 +183,7 @@
   <div class="container mx-auto px-4">
     <div class="flex justify-between items-center mb-8">
       <h2 class="text-3xl font-bold">Featured Products</h2>
-      <%= link_to "View All", "javascript:void(0)", class: "text-purple-600 hover:underline" %>
+      <%= link_to "View All", "javascript:void(0)", class: "change-color hover:underline" %>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -274,10 +191,11 @@
         <div class="bg-white rounded-lg shadow-md product-card overflow-hidden">
           <%= link_to "javascript:void(0)" do %>
             <div class="relative">
-              image
+              <%= image_tag "https://images.unsplash.com/photo-1598046937895-2be846402c0d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTAyfHxtZWRpY2luZXxlbnwwfHwwfHx8MA%3D%3D",
+                            class: "w-full h-48 object-cover" %>
 
                   <span class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-sm rounded">
-                    -1234%
+                    -34%
                   </span>
 
             </div>
@@ -310,6 +228,129 @@
           </div>
         </div>
 
+
+      <div class="bg-white rounded-lg shadow-md product-card overflow-hidden">
+        <%= link_to "javascript:void(0)" do %>
+          <div class="relative">
+            <%= image_tag "https://images.unsplash.com/photo-1574043948184-144f2ef80fe3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjN8fG1lZGljaW5lfGVufDB8fDB8fHww",
+                          class: "w-full h-48 object-cover" %>
+
+            <span class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-sm rounded">
+                    -34%
+                  </span>
+
+          </div>
+
+          <div class="p-4">
+            <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">Product Name</h3>
+            <div class="flex items-center mb-2">
+              <div class="flex text-yellow-400">
+                <% 5.times do |i| %>
+                  <i class="fas fa-star"></i>
+                <% end %>
+              </div>
+              <span class="text-sm text-gray-600 ml-2">Product Review</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div>
+
+                <span class="text-lg font-bold text-red-600">$980</span>
+                <span class="text-sm text-gray-500 line-through ml-2">$990</span>
+
+                <span class="text-lg font-bold text-gray-800">$789</span>
+
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="p-4 pt-0">
+          Cart Form
+        </div>
+      </div>
+
+
+      <div class="bg-white rounded-lg shadow-md product-card overflow-hidden">
+        <%= link_to "javascript:void(0)" do %>
+          <div class="relative">
+            <%= image_tag "https://images.unsplash.com/photo-1573883429746-084be9b5cfca?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzB8fG1lZGljaW5lfGVufDB8fDB8fHww",
+                          class: "w-full h-48 object-cover" %>
+
+            <span class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-sm rounded">
+                    -34%
+                  </span>
+
+          </div>
+
+          <div class="p-4">
+            <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">Product Name</h3>
+            <div class="flex items-center mb-2">
+              <div class="flex text-yellow-400">
+                <% 5.times do |i| %>
+                  <i class="fas fa-star"></i>
+                <% end %>
+              </div>
+              <span class="text-sm text-gray-600 ml-2">Product Review</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div>
+
+                <span class="text-lg font-bold text-red-600">$980</span>
+                <span class="text-sm text-gray-500 line-through ml-2">$990</span>
+
+                <span class="text-lg font-bold text-gray-800">$789</span>
+
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="p-4 pt-0">
+          Cart Form
+        </div>
+      </div>
+
+
+      <div class="bg-white rounded-lg shadow-md product-card overflow-hidden">
+        <%= link_to "javascript:void(0)" do %>
+          <div class="relative">
+            <%= image_tag "https://images.unsplash.com/photo-1587854680352-936b22b91030?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fG1lZGljaW5lfGVufDB8fDB8fHww",
+                          class: "w-full h-48 object-cover" %>
+
+            <span class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-sm rounded">
+                    -34%
+                  </span>
+
+          </div>
+
+          <div class="p-4">
+            <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">Product Name</h3>
+            <div class="flex items-center mb-2">
+              <div class="flex text-yellow-400">
+                <% 5.times do |i| %>
+                  <i class="fas fa-star"></i>
+                <% end %>
+              </div>
+              <span class="text-sm text-gray-600 ml-2">Product Review</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div>
+
+                <span class="text-lg font-bold text-red-600">$980</span>
+                <span class="text-sm text-gray-500 line-through ml-2">$990</span>
+
+                <span class="text-lg font-bold text-gray-800">$789</span>
+
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="p-4 pt-0">
+          Cart Form
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -319,26 +360,68 @@
   <div class="container mx-auto px-4">
     <div class="flex justify-between items-center mb-8">
       <h2 class="text-3xl font-bold">Best Sellers</h2>
-      <%= link_to "View All", "javascript:void(0)", class: "text-purple-600 hover:underline" %>
+      <%= link_to "View All", "javascript:void(0)", class: "change-color hover:underline" %>
     </div>
 
+<!-- Images-->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
 
-        <div class="bg-white rounded-lg shadow-md product-card overflow-hidden">
+      <div class="bg-white rounded-lg shadow-md product-card overflow-hidden">
           <%= link_to "javascript:void(0)" do %>
-            Product Image
+            <%= image_tag "https://plus.unsplash.com/premium_photo-1668487826871-2f2cac23ad56?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNpbmV8ZW58MHx8MHx8fDA%3D" %>
             <div class="p-3">
               <h3 class="font-medium text-gray-800 mb-1 text-sm line-clamp-2">Product Name</h3>
-              <div class="text-lg font-bold text-purple-600">$987</div>
+              <div class="text-lg font-bold change-color">$987</div>
             </div>
           <% end %>
         </div>
+
+      <div class="bg-white rounded-lg shadow-md product-card overflow-hidden">
+          <%= link_to "javascript:void(0)" do %>
+            <%= image_tag "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVkaWNpbmV8ZW58MHx8MHx8fDA%3D" %>
+            <div class="p-3">
+              <h3 class="font-medium text-gray-800 mb-1 text-sm line-clamp-2">Product Name</h3>
+              <div class="text-lg font-bold change-color">$987</div>
+            </div>
+          <% end %>
+        </div>
+
+      <div class="bg-white rounded-lg shadow-md product-card overflow-hidden">
+        <%= link_to "javascript:void(0)" do %>
+          <%= image_tag "https://images.unsplash.com/photo-1522335579687-9c718c5184d7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bWVkaWNpbmV8ZW58MHx8MHx8fDA%3D" %>
+          <div class="p-3">
+            <h3 class="font-medium text-gray-800 mb-1 text-sm line-clamp-2">Product Name</h3>
+            <div class="text-lg font-bold change-color">$987</div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-md product-card overflow-hidden">
+        <%= link_to "javascript:void(0)" do %>
+          <%= image_tag "https://images.unsplash.com/photo-1628771065518-0d82f1938462?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1lZGljaW5lfGVufDB8fDB8fHww" %>
+          <div class="p-3">
+            <h3 class="font-medium text-gray-800 mb-1 text-sm line-clamp-2">Product Name</h3>
+            <div class="text-lg font-bold change-color">$987</div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-md product-card overflow-hidden">
+        <%= link_to "javascript:void(0)" do %>
+          <%= image_tag "https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fG1lZGljaW5lfGVufDB8fDB8fHww" %>
+          <div class="p-3">
+            <h3 class="font-medium text-gray-800 mb-1 text-sm line-clamp-2">Product Name</h3>
+            <div class="text-lg font-bold change-color">$987</div>
+          </div>
+        <% end %>
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- Newsletter Section -->
-<section class="bg-purple-600 text-white py-12">
+<section class="bg-primary-blue text-white py-12">
   <div class="container mx-auto px-4 text-center">
     <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
     <p class="text-xl mb-8">Get the latest deals and product updates delivered to your inbox</p>
@@ -354,7 +437,7 @@
       <!-- Company Info -->
       <div>
         <div class="flex items-center space-x-2 mb-4">
-          <i class="fa-solid fa-capsules text-2xl text-purple-400"></i>
+          <i class="fa-solid fa-capsules text-2xl text-primary-blue"></i>
           <span class="text-2xl font-bold">Osud_Mama</span>
         </div>
         <p class="text-gray-400 mb-4">Your favorite online shopping destination with quality products and excellent service.</p>
@@ -382,11 +465,11 @@
       <div>
         <h3 class="text-lg font-semibold mb-4">Categories</h3>
         <ul class="space-y-2 text-gray-400">
-          <li><%= link_to "Electronics", "javascript:void(0)", class: "hover:text-white" %></li>
-          <li><%= link_to "Fashion","javascript:void(0)", class: "hover:text-white" %></li>
-          <li><%= link_to "Home & Garden", "javascript:void(0)", class: "hover:text-white" %></li>
-          <li><%= link_to "Sports", "javascript:void(0)", class: "hover:text-white" %></li>
-          <li><%= link_to "Books", "javascript:void(0)", class: "hover:text-white" %></li>
+          <li><%= link_to "Medicine", "javascript:void(0)", class: "hover:text-white" %></li>
+          <li><%= link_to "Women","javascript:void(0)", class: "hover:text-white" %></li>
+          <li><%= link_to "Equipment", "javascript:void(0)", class: "hover:text-white" %></li>
+          <li><%= link_to "Pet", "javascript:void(0)", class: "hover:text-white" %></li>
+          <li><%= link_to "Private", "javascript:void(0)", class: "hover:text-white" %></li>
         </ul>
       </div>
 

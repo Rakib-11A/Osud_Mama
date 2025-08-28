@@ -1,92 +1,311 @@
-<div class="navbar bg-base-100 shadow-sm sticky top-0 z-50 flex  justify-between px-10" >
-  <div class="flex-start">
-    <%= link_to "Osud_Mama", root_path, class: "btn btn-ghost text-xl" %>
-  </div>
 
-<!--  Search bar-->
-  <div class="flex rounded-md border-2 border-gray-500 bg-red-200 overflow-hidden max-w-md mx-auto">
-    <input type="email" placeholder="Search for Products, Brands and More..."
-           class="w-full outline-none bg-white text-gray-600 text-sm px-4 py-3" />
-    <%= link_to "javascript:void(0)",
-        class: "flex items-center justify-center px-5" do %>
-      <i class="fa-solid fa-magnifying-glass"></i>
-    <% end %>
-
-  </div>
-
-  <div class="flex gap-2">
-    <!--  Track Order Section-->
-    <div class="flex">
-      <%= link_to "javascript:void(0)",
-                  class: "btn btn-ghost " do %>
-        <div class="flex justify-center items-center gap-4">
-          <p class="text-center text-3xl"><i class="fa-solid fa-truck-fast"></i></p>
-          <p><span class="text-sm">Track</span> <br> <span class="font-bold">Your Order</span></p>
+<nav class="bg-white shadow-md fixed top-0 left-0 w-full z-50">
+    <!-- Top Bar -->
+    <div class="bg-gray-900 text-white text-sm">
+      <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+        <span>Free shipping on orders over <i class="fa-solid fa-bangladeshi-taka-sign text-xs"></i>2999!</span>
+        <div class="flex space-x-4">
+          <a href="#" class="hover:text-gray-300">Help</a>
+          <a href="#" class="hover:text-gray-300"><i class="fa-solid fa-truck-fast mr-1"></i>Track Order</a>
         </div>
-      <% end %>
+      </div>
     </div>
 
-    <!--      Sign In Section-->
-    <div class="dropdown dropdown-end">
-      <div tabindex="0" role="button" class="btn btn-ghost hover:text-purple-600 gap-2">
-        <div class="flex justify-center items-center w-8 h-8 ">
-          <i class="fa-solid fa-user-circle text-xl"></i>
+    <!-- Main Header -->
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <!-- Logo -->
+        <div class="flex items-center space-x-2">
+
+          <%= link_to root_path, class: "btn btn-ghost text-2xl font-bold text-gray-600 change-color" do %>
+            <i class="fa-solid fa-pills text-2xl text-primary-blue"></i>Osud_Mama
+          <% end %>
         </div>
 
-        <div class="flex justify-center items-center">
-          <p class="text-center leading-none">
-            <span class="text-xs">Welcome,</span><br>
-            <% if current_user.present? %>
-              <span class="text-xs"><%= current_user.email.split("@").first %>!</span>
-            <% else %>
-              <span class="text-xs">Sign in/<span class="font-bold">Register</span></span>
+        <!-- Search Bar -->
+        <div class="flex-1 max-w-lg mx-8">
+          <%= form_with url: "#", method: :get, local: true, class: "relative" do |f| %>
+            <%= f.text_field :q, placeholder: "Search products...",
+                             class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" %>
+            <%= link_to f.submit, class: "absolute right-2 top-2 text-gray-500 change-color" do %>
+              <i class="fas fa-search"></i>
             <% end %>
-          </p>
+
+          <% end %>
         </div>
 
+        <!-- User Actions -->
+        <div class="flex items-center space-x-6">
+          <%= link_to "#", class: "relative text-gray-600" do %>
+            <!-- Solid heart -->
+            <svg viewBox="0 0 48 48" class="w-6 h-6 text-gray-500 change-color rotate-opposite" aria-hidden="true">
+              <path fill="currentColor" d="M24 42C12 30 0 24 0 14 0 6.27 6.27 0 14 0c3.87 0 7.32 1.79 10 4.65C26.68 1.79 30.13 0 34 0 41.73 0 48 6.27 48 14c0 10-12 16-24 28Z"/>
+            </svg>
+
+            <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">3</span>
+          <% end %>
+
+          <%#= link_to "#", class: "relative text-gray-600 change-color" do %>
+<!--            <i class="fas fa-shopping-cart text-xl"></i>-->
+<!--            <span class="absolute -top-2 -right-2 bg-purple-500 text-white text-xs rounded-full px-1">5</span>-->
+          <%# end %>
+
+        <!--Cart From DaisyUI-->
+          <div class="flex -mr-1">
+            <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                <div class="indicator change-color rotate-opposite">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /> </svg>
+                  <span class="badge badge-sm indicator-item bg-red-500 text-white text-xs rounded-full px-1">8</span>
+                </div>
+              </div>
+              <div
+                tabindex="0"
+                class="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow">
+                <div class="card-body">
+                  <span class="text-lg font-bold">8 Items</span>
+                  <span class="text-success">Subtotal: $999</span>
+                  <div class="card-actions">
+                    <button class="btn btn-primary btn-block">View cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--User Profile-->
+          <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost change-color gap-2">
+              <div class="flex justify-center items-center w-8 h-8 ">
+                <i class="fa-solid fa-user-circle text-xl"></i>
+              </div>
+
+              <div class="flex justify-center items-center">
+                <p class="text-center leading-none">
+                  <span class="text-xs">Welcome,</span><br>
+                  <% if current_user.present? %>
+                    <span class="text-xs"><%= current_user.email.split("@").first %>!</span>
+                  <% else %>
+                    <span class="text-xs">Sign in/<span class="font-bold">Register</span></span>
+                  <% end %>
+                </p>
+              </div>
+
+            </div>
+
+            <ul
+              tabindex="0"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+              <li>
+                <a class="justify-between">
+                  Profile
+                  <span class="badge">New</span>
+                </a>
+              </li>
+              <li><a>Settings</a></li>
+              <li>
+                <% if current_user.present? %>
+                  <%= link_to "Logout", destroy_user_session_path, data: {turbo_method: :delete} %>
+                <% else %>
+                  <%= link_to "Log In",
+                              "#",
+                              data: {
+                                controller: "login-modal",
+                                action: "click->login-modal#open"
+                              }
+                  %>
+                  <%= link_to "Register",
+                              new_user_registration_path
+
+                  %>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
-      <ul
-        tabindex="0"
-        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li>
-          <a class="justify-between">
-            Profile
-            <span class="badge">New</span>
-          </a>
-        </li>
-        <li><a>Settings</a></li>
-        <li>
-          <% if current_user.present? %>
-            <%= link_to "Logout", destroy_user_session_path, data: {turbo_method: :delete} %>
-          <% else %>
-            <%= link_to "Log In",
-                        "#",
-                        data: {
-                          controller: "login-modal",
-                          action: "click->login-modal#open"
-                        }
-            %>
-            <%= link_to "Register",
-                        new_user_registration_path
+      <!-- Navigation Menu -->
+      <div class=" mt-4 border-t border-gray-200 pt-4">
+        <ul class="flex items-center space-x-8">
+          <li>
+            <div class="drawer">
+              <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+              <div class="drawer-content">
+                <!-- Page content here -->
+                <label for="my-drawer" class="btn bg-gradient-to-br from-emerald-400 to-blue-800 drawer-button text-white"><i class="fas fa-bars"></i>All Categories</label>
+              </div>
+              <div class="drawer-side">
+                <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+                <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                  <!-- Sidebar content here -->
+                  <!-- Sidebar Header -->
+                  <li><div class="hero-gradient text-white p-4 flex items-center justify-between">
+                    <h2 class="text-xl font-bold flex items-center">
+                      <i class="fas fa-list mr-3"></i>
+                      All Categories
+                    </h2>
+                    <button id="close-sidebar" class="text-white hover:hero-gradient ">
+                      <i class="fas fa-times text-xl"></i>
+                    </button>
+                  </div></li>
+                  <ul>
+                    <div class="p-4 overflow-y-auto h-full pb-20">
+                    <!-- Main Categories -->
+                    <div class="space-y-2">
+                      <!-- Electronics Category -->
+                      <div class="category-group">
+                        <div class="category-item p-3 rounded-lg cursor-pointer flex items-center justify-between">
+                          <div class="flex items-center space-x-3">
+                            <i class="fas fa-laptop text-primary-blue"></i>
+                            <span class="font-medium">Electronics</span>
+                          </div>
+                          <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                        <div class="ml-8 space-y-1 text-sm text-gray-600">
+                          <%= link_to "Smartphones", "javascript:void(0)",class: "block py-1 change-color" %>
+                          <%= link_to "Laptops", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Headphones", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Cameras", "javascript:void(0)", class: "block py-1 change-color" %>
+                        </div>
+                      </div>
 
-            %>
-          <% end %>
-        </li>
-      </ul>
+                      <!-- Fashion Category -->
+                      <div class="category-group">
+                        <div class="category-item p-3 rounded-lg cursor-pointer flex items-center justify-between">
+                          <div class="flex items-center space-x-3">
+                            <i class="fas fa-tshirt text-primary-blue"></i>
+                            <span class="font-medium">Fashion</span>
+                          </div>
+                          <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                        <div class="ml-8 space-y-1 text-sm text-gray-600">
+                          <%= link_to "Men's Clothing", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Women's Clothing", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Shoes", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Accessories", "javascript:void(0)", class: "block py-1 change-color" %>
+                        </div>
+                      </div>
+
+                      <!-- Home & Garden Category -->
+                      <div class="category-group">
+                        <div class="category-item p-3 rounded-lg cursor-pointer flex items-center justify-between">
+                          <div class="flex items-center space-x-3">
+                            <i class="fas fa-home text-primary-blue"></i>
+                            <span class="font-medium">Home & Garden</span>
+                          </div>
+                          <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                        <div class="ml-8 space-y-1 text-sm text-gray-600">
+                          <%= link_to "Furniture", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Kitchen", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Garden Tools", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Home Decor", "javascript:void(0)", class: "block py-1 change-color" %>
+                        </div>
+                      </div>
+
+                      <!-- Sports Category -->
+                      <div class="category-group">
+                        <div class="category-item p-3 rounded-lg cursor-pointer flex items-center justify-between">
+                          <div class="flex items-center space-x-3">
+                            <i class="fas fa-dumbbell text-primary-blue"></i>
+                            <span class="font-medium">Sports & Fitness</span>
+                          </div>
+                          <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                        <div class="ml-8 space-y-1 text-sm text-gray-600">
+                          <%= link_to "Gym Equipment", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Outdoor Sports", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Athletic Wear", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Team Sports", "javascript:void(0)", class: "block py-1 change-color" %>
+                        </div>
+                      </div>
+
+                      <!-- Books Category -->
+                      <div class="category-group">
+                        <div class="category-item p-3 rounded-lg cursor-pointer flex items-center justify-between">
+                          <div class="flex items-center space-x-3">
+                            <i class="fas fa-book text-primary-blue"></i>
+                            <span class="font-medium">Books</span>
+                          </div>
+                          <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                        <div class="ml-8 space-y-1 text-sm text-gray-600">
+                          <%= link_to "Fiction", "javascript:void(0)",class: "block py-1 change-color" %>
+                          <%= link_to "Non-Fiction", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Educational", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Comics", "javascript:void(0)", class: "block py-1 change-color" %>
+                        </div>
+                      </div>
+
+                      <!-- Beauty & Health Category -->
+                      <div class="category-group">
+                        <div class="category-item p-3 rounded-lg cursor-pointer flex items-center justify-between">
+                          <div class="flex items-center space-x-3">
+                            <i class="fas fa-heart text-primary-blue"></i>
+                            <span class="font-medium">Beauty & Health</span>
+                          </div>
+                          <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                        <div class="ml-8 space-y-1 text-sm text-gray-600">
+                          <%= link_to "Skincare", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Makeup", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Health Supplements", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Personal Care", "javascript:void(0)", class: "block py-1 change-color" %>
+                        </div>
+                      </div>
+
+                      <!-- Automotive Category -->
+                      <div class="category-group">
+                        <div class="category-item p-3 rounded-lg cursor-pointer flex items-center justify-between">
+                          <div class="flex items-center space-x-3">
+                            <i class="fas fa-car text-primary-blue"></i>
+                            <span class="font-medium">Automotive</span>
+                          </div>
+                          <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                        <div class="ml-8 space-y-1 text-sm text-gray-600">
+                          <%= link_to "Car Parts", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Accessories", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Tools", "javascript:void(0)", class: "block py-1 change-color" %>
+                          <%= link_to "Maintenance", "javascript:void(0)", class: "block py-1 change-color" %>
+                        </div>
+                      </div>
+                      <!-- Special Categories -->
+                      <div class="mt-6 pt-6 border-t">
+                        <h3 class="text-sm font-semibold text-gray-500 uppercase mb-3">Special Categories</h3>
+                        <div class="space-y-2">
+                          <%= link_to "javascript:void(0)", class: "category-item p-3 rounded-lg cursor-pointer flex items-center space-x-3 bg-red-50 hover:bg-red-100" do %>
+                            <i class="fas fa-fire text-red-600"></i>
+                            <span class="font-medium text-red-600">Sale Items</span>
+                          <% end %>
+
+                          <%= link_to "javascript:void(0)", class: "category-item p-3 rounded-lg cursor-pointer flex items-center space-x-3 bg-green-50 hover:bg-green-100" do %>
+                            <i class="fas fa-sparkles text-green-600"></i>
+                            <span class="font-medium text-green-600">New Arrivals</span>
+                          <% end %>
+
+                          <%= link_to "javascript:void(0)", class: "category-item p-3 rounded-lg cursor-pointer flex items-center space-x-3 bg-purple-50 hover:bg-purple-100" do %>
+                            <i class="fas fa-trending-up text-primary-blue"></i>
+                            <span class="font-medium text-primary-blue">Trending</span>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </ul>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <li class="transform transition-transform duration-300 ease-in-out hover:-translate-y-[2px]"><%= link_to "Medicine", "javascript:void(0)", class: "text-gray-700 change-color" %></li>
+          <li class="transform transition-transform duration-300 ease-in-out hover:-translate-y-[2px]"><%= link_to "Women", "javascript:void(0)", class: "text-gray-700 change-color" %></li>
+          <li class="transform transition-transform duration-300 ease-in-out hover:-translate-y-[2px]"><%= link_to "Equipment", "javascript:void(0)", class: "text-gray-700 change-color" %></li>
+          <li class="transform transition-transform duration-300 ease-in-out hover:-translate-y-[2px]"><%= link_to "Pet", "javascript:void(0)", class: "text-gray-700 change-color" %></li>
+          <li class="transform transition-transform duration-300 ease-in-out hover:-translate-y-[2px]"><%= link_to "Private", "javascript:void(0)", class: "text-gray-700 change-color" %></li>
+          <li class="transform transition-transform duration-300 ease-in-out hover:-translate-y-[2px]"><%= link_to "Sale", "javascript:void(0)", class: "text-red-600 hover:text-red-700 font-bold" %></li>
+        </ul>
+      </div>
     </div>
-    <div class="flex justify-center items-center">
-      <%= link_to "javascript:void(0)",
-                  class: "btn btn-ghost text-xl" do %>
-        <div class="relative">
-          <i class="fa-solid fa-cart-shopping text-2xl"></i>
-          <span
-            class="absolute -top-2 -right-2 bg-red-400 text-white text-xs font-bold px-2 py-0.5 rounded-full"
-          >
-      0
-    </span>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
+  </nav>

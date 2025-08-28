@@ -4,7 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["loginModal","registrationModal"]
   connect() {
-    console.log("Authentication Modal Controller connected!")
+    // console.log("Authentication Modal Controller connected!")
   }
   open(event){
     event.preventDefault()

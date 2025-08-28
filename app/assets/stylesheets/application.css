@@ -12,3 +12,7 @@
 *= require_tree .
 *= require_self
  */
+
+:root {
+    --primary-blue: #4d88c2;
+}
